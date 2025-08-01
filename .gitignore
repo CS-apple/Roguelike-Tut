@@ -1,0 +1,5 @@
+# ignore venv
+venv
+.venv
+# ignore debugger
+.vscode
