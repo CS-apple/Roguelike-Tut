@@ -5,6 +5,7 @@ import tcod.console
 import tcod.context
 import tcod.event
 import tcod.tileset 
+import g
 
 @attrs.define()
 class ExampleState:
@@ -20,13 +21,13 @@ class ExampleState:
         match event:
             case tcod.event.Quit():
                 raise SystemExit
-            case tcod.event.KeyDown(sym=tcod.event.KeySym.LEFT):
+            case tcod.event.KeyDown(sym=tcod.event.KeySym.LEFT) | tcod.event.KeyDown(sym=tcod.event.KeySym.A):
                 self.player_x -= 1
-            case tcod.event.KeyDown(sym=tcod.event.KeySym.RIGHT):
+            case tcod.event.KeyDown(sym=tcod.event.KeySym.RIGHT) | tcod.event.KeyDown(sym=tcod.event.KeySym.D):
                 self.player_x += 1
-            case tcod.event.KeyDown(sym=tcod.event.KeySym.W, tcod.event.KeySym.UP):
+            case tcod.event.KeyDown(sym=tcod.event.KeySym.UP) | tcod.event.KeyDown(sym=tcod.event.KeySym.W):
                 self.player_y -= 1
-            case tcod.event.KeyDown(sym=tcod.event.KeySym.DOWN):
+            case tcod.event.KeyDown(sym=tcod.event.KeySym.DOWN) | tcod.event.KeyDown(sym=tcod.event.KeySym.S):
                 self.player_y += 1
                 
 
@@ -38,11 +39,11 @@ def main() -> None:
     tcod.tileset.procedural_block_elements(tileset=tileset)
     console = tcod.console.Console(80, 60)
     state =ExampleState(player_x=console.width // 2, player_y=console.height //2)
-    with tcod.context.new(console=console, tileset=tileset) as context:
+    with tcod.context.new(console=console, tileset=tileset) as g.context:
         while True: # MAIN LOOP
             console.clear() #clear console bfore drawing
             state.on_draw(console) #draw current state
-            context.present(console) #render console to window and show it
+            g.context.present(console) #render console to window and show it
             for event in tcod.event.wait(): # Event Loop, blocks until pending events exist
                 print(event)
                 state.on_event(event)

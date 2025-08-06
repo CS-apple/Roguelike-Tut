@@ -1,2 +1,3 @@
 tcod>=19.3.0
 numpy>=2.3.2
+tcod_ecs>=5.4.1

@@ -1,0 +1,12 @@
+"""This module stores globally mutable variables used by this program"""
+
+from __future__ import annotations
+
+import tcod.context
+import tcod.ecs
+
+context: tcod.context.Context
+"""window managed by tcod"""
+
+word: tcod.ecs.Registry
+""" The active ECS registry and current session"""
