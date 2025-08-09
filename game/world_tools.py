@@ -20,9 +20,9 @@ def new_world() -> Registry:
 
     for val in range(10):
         gold = world[object()]
-        gold.components[Position] = Position(rng.randint(0, 20), rng.randint(0,20))
+        gold.components[Position] = Position(rng.randint(0, 20), rng.randint(0, 20))
         gold.components[Graphic] = Graphic(ord("$"), fg=(255, 255, 0))
         gold.components[Gold] = rng.randint(1,10)
         gold.tags |= {IsItem}
-
+        print(gold.components[Position])
     return world

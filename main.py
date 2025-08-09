@@ -17,7 +17,7 @@ def main() -> None:
         "data/Alloy_curses_12x12.png", columns=16, rows=16, charmap=tcod.tileset.CHARMAP_CP437
     )
     tcod.tileset.procedural_block_elements(tileset=tileset)
-    console = tcod.console.Console(80, 60)
+    console = tcod.console.Console(80, 50)
     state = game.states.InGame()
     g.world = game.world_tools.new_world()
     with tcod.context.new(console=console, tileset=tileset) as g.context:

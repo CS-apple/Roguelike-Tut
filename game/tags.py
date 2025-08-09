@@ -7,7 +7,7 @@ from typing import Final
 IsPlayer: Final = "IsPlayer"
 """Player controller"""
 
-IsActor: Final = "is Actor"
+IsActor: Final = "IsActor"
 """Entity is actor"""
 
 IsItem: Final = "IsItem"

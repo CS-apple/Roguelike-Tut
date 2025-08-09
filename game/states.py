@@ -20,15 +20,20 @@ class InGame:
         (player,) = g.world.Q.all_of(tags=[IsPlayer])
         match event:
             case tcod.event.Quit():
-                raise SystemExit
+                raise SystemExit()
             case tcod.event.KeyDown(sym=sym) if sym in DIRECTION_KEYS:
                 player.components[Position] += DIRECTION_KEYS[sym]
+                print(player.components[Position])
                 #auto pick up gold
                 for gold in g.world.Q.all_of(components=[Gold], tags=[player.components[Position], IsItem]):
+                    print("found gold")
                     player.components[Gold] += gold.components[Gold]
+                    print("added gold")
                     text = f"Picked up {gold.components[Gold]}g, total: {player.components[Gold]}g"
-                    g.wold[None].components[str] = text
+                    g.world[None].components["Text", str] = text
+                    print("picked up gold")
                     gold.clear()
+                    print("delete gold")
 
     def on_draw(self, console: tcod.console.Console) -> None:
         """Draw the standard screen"""
@@ -38,5 +43,6 @@ class InGame:
                 continue
             graphic = entity.components[Graphic]
             console.rgb[["ch", "fg"]][pos.y, pos.x] = graphic.ch, graphic.fg
+
         if text := g.world[None].components.get(("Text", str)):
-            console.print(x=0, y=console.height -1, text=text, fg=(255, 255, 255), bg=(0, 0, 0))
+            console.print(x=0, y=console.height -2, text= text, fg=(255, 255, 255), bg=(0, 0, 0))

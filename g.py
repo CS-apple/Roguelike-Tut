@@ -8,5 +8,5 @@ import tcod.ecs
 context: tcod.context.Context
 """window managed by tcod"""
 
-word: tcod.ecs.Registry
+world: tcod.ecs.Registry
 """ The active ECS registry and current session"""
